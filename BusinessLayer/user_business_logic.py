@@ -15,7 +15,7 @@ class UserBusinessLogic:
         user = self.user_data_access.get_user(username, hash_password)
         if not user:
             return Response(None, False, "Invalid username or password.")
-        if not user.active:
+        if not user.status:
             return Response(None, False, "Your account is not active.")
         return Response(user, True)
 

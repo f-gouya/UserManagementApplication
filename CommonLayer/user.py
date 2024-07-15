@@ -5,7 +5,7 @@ class User:
         self.last_name = lastname
         self.username = username
         self.password = password
-        self.active = True if status == 1 else False
+        self.status = True if status == 1 else False
         self.role_id = role_id
 
     def get_full_name(self):
