@@ -26,7 +26,7 @@ class UserBusinessLogic:
             return Response(None, False, "Password must be complex and at least 8 characters.")
         else:
             self.user_data_access.add_new_user(firstname, lastname, username, password, 0, 1)
-            return Response(None, True, f"Your Account is created successfully.\n"
+            return Response(None, True, f"Your account is created successfully.\n"
                                         f"Please contact the Administrator to activate your account.")
 
     def get_users(self, current_user):
