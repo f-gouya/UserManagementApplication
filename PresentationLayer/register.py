@@ -55,8 +55,10 @@ class RegisterFrame(Frame):
 
         user_business = UserBusinessLogic()
         response = user_business.enrollment(firstname, lastname, username, password)
-        if response.success:
-            messagebox.showinfo("Info", message=response.message)
+        if not response.success:
+            messagebox.showerror("Error", response.message)
+        else:
+            messagebox.showinfo("Info", response.message)
 
     def clear_register_entry(self):
         self.firstname_entry.delete(0, "end")

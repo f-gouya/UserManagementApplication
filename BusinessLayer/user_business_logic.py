@@ -25,7 +25,9 @@ class UserBusinessLogic:
         elif len(password) < 8:
             return Response(None, False, "Password must be complex and at least 8 characters.")
         else:
-            self.user_data_access.add_new_user(firstname, lastname, username, password, 0, 1)
+            hash_string = hashlib.md5(password.encode())
+            hash_password = hash_string.hexdigest()
+            self.user_data_access.add_new_user(firstname, lastname, username, hash_password, 0, 1)
             return Response(None, True, f"Your account is created successfully.\n"
                                         f"Please contact the Administrator to activate your account.")
 
