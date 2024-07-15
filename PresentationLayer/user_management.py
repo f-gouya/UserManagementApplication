@@ -18,16 +18,14 @@ class UserManagementFrame(Frame):
         self.header.grid(row=0, column=0, pady=10)
 
         self.search_entry = Entry(self, width=30)
-        self.search_entry.grid(row=1, column=0, pady=(0, 10), padx=10, sticky="w")
+        self.search_entry.grid(row=1, column=0, pady=(0, 10), padx=10, sticky="ew")
+        self.search_entry.bind("<KeyRelease>", self.search)
 
-        self.search_button = Button(self, text="Search", command=self.search)
-        self.search_button.grid(row=1, column=0, pady=(0, 10), padx=10, sticky="e")
+        self.activate_button = Button(self, text="Activate", width=10, command=self.activate)
+        self.activate_button.grid(row=2, column=0, pady=(0, 10), padx=10, sticky="w")
 
-        self.activate_button = Button(self, text="Activate", command=self.activate)
-        self.activate_button.grid(row=2, column=0, pady=(0, 10), padx=10, sticky="e")
-
-        self.deactivate_button = Button(self, text="Deactivate", command=self.deactivate)
-        self.deactivate_button.grid(row=2, column=0, pady=(0, 10), padx=10, sticky="w")
+        self.deactivate_button = Button(self, text="Deactivate", width=10, command=self.deactivate)
+        self.deactivate_button.grid(row=2, column=0, pady=(0, 10), padx=10, sticky="e")
 
         self.user_table = Treeview(self, columns=("firstname", "lastname", "username", "status"))
         self.user_table.grid(row=3, column=0, pady=(0, 10), padx=10, sticky="nsew")
@@ -38,7 +36,7 @@ class UserManagementFrame(Frame):
         self.user_table.heading("#3", text="Username")
         self.user_table.heading("#4", text="Status")
 
-    def search(self):
+    def search(self, _):
         term = self.search_entry.get()
         user_list = self.user_business.search(self.current_user, term)
         self.fill_table(user_list)
