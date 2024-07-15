@@ -8,8 +8,8 @@ class UserBusinessLogic:
         self.user_data_access = UserDataAccess()
 
     def login(self, username, password):
-        if len(username) < 3 or len(password) < 6:
-            return Response(None, False, "Invalid input.")
+        if len(username) < 4 or len(password) < 8:
+            return Response(None, False, "Invalid inputs.")
         hash_string = hashlib.md5(password.encode())
         hash_password = hash_string.hexdigest()
         user = self.user_data_access.get_user(username, hash_password)
@@ -18,6 +18,16 @@ class UserBusinessLogic:
         if not user.status:
             return Response(None, False, "Your account is not active.")
         return Response(user, True)
+
+    def enrollment(self, firstname, lastname, username, password):
+        if len(firstname) < 3 or len(lastname) < 3:
+            return Response(None, False, "Invalid inputs.")
+        elif len(password) < 8:
+            return Response(None, False, "Password must be complex and at least 8 characters.")
+        else:
+            self.user_data_access.add_new_user(firstname, lastname, username, password, 0, 1)
+            return Response(None, True, f"Your Account is created successfully.\n"
+                                        f"Please contact the Administrator to activate your account.")
 
     def get_users(self, current_user):
         if current_user.role_id == 2:

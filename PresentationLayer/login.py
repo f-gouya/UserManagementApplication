@@ -32,7 +32,8 @@ class LoginFrame(Frame):
         self.register_button.grid(row=3, column=1, pady=(0, 10), padx=(0, 20), sticky="e")
 
     def show_register_frame(self):
-        self.main_view.switch_frame("register")
+        register_frame = self.main_view.switch_frame("register")
+        register_frame.clear_register_entry()
 
     def login(self):
         username = self.username_entry.get()
@@ -44,10 +45,10 @@ class LoginFrame(Frame):
         if not response.success:
             messagebox.showerror("Error", response.message)
         else:
-            self.clear_entry()
+            self.clear_login_entry()
             home_frame = self.main_view.switch_frame("home")
             home_frame.set_current_user(response.data)
 
-    def clear_entry(self):
+    def clear_login_entry(self):
         self.username_entry.delete(0, "end")
         self.password_entry.delete(0, "end")

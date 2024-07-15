@@ -80,3 +80,13 @@ class UserDataAccess:
                 user_list.append(user)
 
         return user_list
+
+    def add_new_user(self, firstname, lastname, username, password, status, role_id):
+        with sqlite3.connect(self.database_name) as connection:
+            cursor = connection.cursor()
+            cursor.execute("""
+            INSERT INTO User (first_name, last_name, username, password, status, role_id)
+            VALUES (?, ?, ?, ?, ?, ?);
+        """, (firstname, lastname, username, password, status, role_id))
+
+            connection.commit()
