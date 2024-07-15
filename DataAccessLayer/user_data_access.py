@@ -76,7 +76,7 @@ class UserDataAccess:
             data = cursor.fetchall()
 
             for item in data:
-                user = User(item[0], item[1], item[2], item[3], None, item[4] == 1, data[5])
+                user = User(item[0], item[1], item[2], item[3], None, item[4] == 1, item[5])
                 user_list.append(user)
 
         return user_list
