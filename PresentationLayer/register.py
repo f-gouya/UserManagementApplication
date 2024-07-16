@@ -59,6 +59,7 @@ class RegisterFrame(Frame):
             messagebox.showerror("Error", response.message)
         else:
             messagebox.showinfo("Info", response.message)
+            self.clear_register_entry()
 
     def clear_register_entry(self):
         self.firstname_entry.delete(0, "end")
