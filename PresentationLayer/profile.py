@@ -1,5 +1,4 @@
-from tkinter import Frame, Label, Entry, Button, messagebox
-from BusinessLayer.user_business_logic import UserBusinessLogic
+from tkinter import Frame, Label, Button
 
 
 class ProfileFrame(Frame):
