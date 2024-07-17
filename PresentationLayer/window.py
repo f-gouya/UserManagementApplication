@@ -6,7 +6,7 @@ class Window(Tk):
         super().__init__()
 
         self.title("User Management Application")
-        self.geometry("400x200")
+        self.geometry("400x215")
 
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)

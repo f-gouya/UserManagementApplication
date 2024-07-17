@@ -28,13 +28,13 @@ class ProfileFrame(Frame):
         self.username_label = Label(self, text="Username")
         self.username_label.grid(row=3, column=0, pady=(0, 10), padx=(20, 0), sticky="w")
 
-        self.current_user_username_label = Label(self, text="Username")
+        self.current_user_username_label = Label(self)
         self.current_user_username_label.grid(row=3, column=1, pady=(0, 10), padx=(0, 20), sticky="w")
 
         self.change_password_button = Button(self, text="Change Password")
         self.change_password_button.grid(row=4, column=0, columnspan=2, pady=(0, 10), padx=20, sticky="ew")
 
-        self.back_button = Button(self, text="Back")
+        self.back_button = Button(self, text="Back", command=self.show_home_frame)
         self.back_button.grid(row=5, column=0, columnspan=2, pady=(0, 10), padx=20, sticky="ew")
 
     def show_user_information(self, user):
@@ -43,3 +43,6 @@ class ProfileFrame(Frame):
         self.current_user_firstname_label.config(text=f"{self.current_user.first_name}")
         self.current_user_lastname_label.config(text=f"{self.current_user.last_name}")
         self.current_user_username_label.config(text=f"{self.current_user.username}")
+
+    def show_home_frame(self):
+        self.main_view.switch_frame("home")
