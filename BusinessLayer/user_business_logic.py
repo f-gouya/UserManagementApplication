@@ -22,6 +22,8 @@ class UserBusinessLogic:
     def enrollment(self, firstname, lastname, username, password):
         if len(firstname) < 3 or len(lastname) < 3:
             return Response(None, False, "Invalid inputs.")
+        elif len(username) < 4:
+            return Response(None, False, "Username must be at least 4 characters.")
         elif len(password) < 8:
             return Response(None, False, "Password must be complex and at least 8 characters.")
         else:
