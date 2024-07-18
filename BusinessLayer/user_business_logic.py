@@ -32,7 +32,7 @@ class UserBusinessLogic:
         else:
             hash_string = hashlib.md5(password.encode())
             hash_password = hash_string.hexdigest()
-            self.user_data_access.add_new_user(firstname, lastname, username, hash_password, 0, 1)
+            self.user_data_access.add_new_user(firstname, lastname, username, hash_password)
             return Response(None, True, f"Your account is created successfully.\n"
                                         f"Please contact the Administrator to activate your account.")
 
