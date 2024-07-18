@@ -90,3 +90,16 @@ class UserDataAccess:
         """, (firstname, lastname, username, password, status, role_id))
 
             connection.commit()
+
+    def check_unique_username(self, username):
+        with sqlite3.connect(self.database_name) as connection:
+            cursor = connection.cursor()
+            query = """
+            SELECT username
+            FROM User
+            WHERE username = ?
+            """
+            cursor.execute(query, (username,))
+            data = cursor.fetchone()
+            if data:
+                return True

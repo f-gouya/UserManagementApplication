@@ -1,5 +1,6 @@
 from tkinter import Frame, Label, Entry, Button, messagebox
 from BusinessLayer.user_business_logic import UserBusinessLogic
+from CommonLayer import global_variables
 
 
 class LoginFrame(Frame):
@@ -49,7 +50,8 @@ class LoginFrame(Frame):
         else:
             self.clear_login_entry()
             home_frame = self.main_view.switch_frame("home")
-            home_frame.set_current_user(response.data)
+            global_variables.current_user = response.data
+            home_frame.set_home_user()
 
     def clear_login_entry(self):
         self.username_entry.delete(0, "end")

@@ -8,7 +8,6 @@ class UserManagementFrame(Frame):
         super().__init__(window)
 
         self.row_list = []
-        self.current_user = None
         self.user_business = UserBusinessLogic()
 
         self.grid_columnconfigure(0, weight=1)
@@ -38,13 +37,13 @@ class UserManagementFrame(Frame):
 
     def search(self, _):
         term = self.search_entry.get()
-        user_list = self.user_business.search(self.current_user, term)
+        user_list = self.user_business.search(term)
         self.fill_table(user_list)
 
     def activate(self):
         user_id_list = self.user_table.selection()
         for user_id in user_id_list:
-            self.user_business.activate(self.current_user, user_id)
+            self.user_business.activate(user_id)
 
         user_list = self.load_data()
         self.fill_table(user_list)
@@ -52,18 +51,17 @@ class UserManagementFrame(Frame):
     def deactivate(self):
         user_id_list = self.user_table.selection()
         for user_id in user_id_list:
-            self.user_business.deactivate(self.current_user, user_id)
+            self.user_business.deactivate(user_id)
 
         user_list = self.load_data()
         self.fill_table(user_list)
 
-    def set_current_user(self, user):
-        self.current_user = user
+    def set_management_user_info(self):
         user_list = self.load_data()
         self.fill_table(user_list)
 
     def load_data(self):
-        user_list = self.user_business.get_users(self.current_user)
+        user_list = self.user_business.get_users()
         return user_list
 
     def fill_table(self, user_list):
