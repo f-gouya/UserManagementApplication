@@ -109,8 +109,8 @@ class UserDataAccess:
             cursor = connection.cursor()
             cursor.execute("""
             INSERT INTO User (first_name, last_name, username, password)
-            VALUES (?, ?, ?, ?, ?, ?);
-        """, (firstname, lastname, username, password))
+            VALUES (?, ?, ?, ?);
+        """, (firstname.capitalize(), lastname.capitalize(), username, password))
 
             connection.commit()
 

@@ -75,7 +75,7 @@ class UserBusinessLogic:
             return True
 
     def confirm_user_request(self, user_id):
-        hash_string = hashlib.md5("123456".encode())
+        hash_string = hashlib.md5("P@ssw0rd".encode())
         hash_password = hash_string.hexdigest()
         if global_variables.current_user.role_id == 2:
             self.user_data_access.update_password(user_id, hash_password)
