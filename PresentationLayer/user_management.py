@@ -20,10 +20,10 @@ class UserManagementFrame(Frame):
         self.search_entry.grid(row=1, column=0, pady=(0, 10), padx=10, sticky="ew")
         self.search_entry.bind("<KeyRelease>", self.search)
 
-        self.activate_button = Button(self, text="Activate", width=10, command=self.activate)
+        self.activate_button = Button(self, text="Activate", width=15, command=self.activate)
         self.activate_button.grid(row=2, column=0, pady=(0, 10), padx=10, sticky="w")
 
-        self.deactivate_button = Button(self, text="Deactivate", width=10, command=self.deactivate)
+        self.deactivate_button = Button(self, text="Deactivate", width=15, command=self.deactivate)
         self.deactivate_button.grid(row=2, column=0, pady=(0, 10), padx=10, sticky="e")
 
         self.user_table = Treeview(self, columns=("firstname", "lastname", "username", "status"))

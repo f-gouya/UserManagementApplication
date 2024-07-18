@@ -28,15 +28,22 @@ class LoginFrame(Frame):
         self.password_entry.grid(row=2, column=1, pady=(0, 10), padx=(0, 20), sticky="ew")
         self.password_entry.insert(0, "P@ssw0rd")
 
-        self.login_button = Button(self, text="Login", width=10, command=self.login)
+        self.login_button = Button(self, text="Login", width=15, command=self.login)
         self.login_button.grid(row=3, column=1, pady=(0, 10), sticky="w")
 
-        self.register_button = Button(self, text="Register", width=10, command=self.show_register_frame)
+        self.register_button = Button(self, text="Register", width=15, command=self.show_register_frame)
         self.register_button.grid(row=3, column=1, pady=(0, 10), padx=(0, 20), sticky="e")
+
+        self.reset_password_button = Button(self, text="Reset Password", width=15,
+                                            command=self.show_reset_password_frame)
+        self.reset_password_button.grid(row=4, column=1, pady=(0, 10), padx=(0, 20), sticky="e")
 
     def show_register_frame(self):
         register_frame = self.main_view.switch_frame("register")
         register_frame.clear_register_entry()
+
+    def show_reset_password_frame(self):
+        self.main_view.switch_frame("reset_password")
 
     def login(self):
         username = self.username_entry.get()

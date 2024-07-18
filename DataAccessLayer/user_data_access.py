@@ -106,3 +106,13 @@ class UserDataAccess:
             data = cursor.fetchone()
             if data:
                 return True
+
+    def update_request(self, username):
+        with sqlite3.connect(self.database_name) as connection:
+            cursor = connection.cursor()
+            cursor.execute("""
+            Update User
+            Set request = ?
+            Where username = ?""", (1, username))
+
+            connection.commit()

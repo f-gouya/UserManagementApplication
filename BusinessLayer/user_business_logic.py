@@ -27,7 +27,7 @@ class UserBusinessLogic:
             return Response(None, False, "Username must be at least 4 characters.")
         elif len(password) < 8:
             return Response(None, False, "Password must be complex and at least 8 characters.")
-        elif not self.check_unique_username(username):
+        elif self.check_username_exist(username):
             return Response(None, False, "This username already exists.")
         else:
             hash_string = hashlib.md5(password.encode())
@@ -35,6 +35,16 @@ class UserBusinessLogic:
             self.user_data_access.add_new_user(firstname, lastname, username, hash_password)
             return Response(None, True, f"Your account is created successfully.\n"
                                         f"Please contact the Administrator to activate your account.")
+
+    def change_password(self, username):
+        if len(username) < 4:
+            return Response(None, False, "Username must be at least 4 characters.")
+        elif not self.check_username_exist(username):
+            return Response(None, False, "The username was not found.")
+        else:
+            self.user_data_access.update_request(username)
+            return Response(None, True, f"Your request was sent to the administrator.\n"
+                                        f"Please contact the Administrator to confirm your request.")
 
     def get_users(self):
         if global_variables.current_user.role_id == 2:
@@ -54,7 +64,7 @@ class UserBusinessLogic:
             user_list = self.user_data_access.search(term)
             return user_list
 
-    def check_unique_username(self, username):
+    def check_username_exist(self, username):
         username_exist = self.user_data_access.check_unique_username(username)
         if username_exist:
-            return False
+            return True
