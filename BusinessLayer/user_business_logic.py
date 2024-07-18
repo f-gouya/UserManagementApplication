@@ -7,12 +7,12 @@ import hashlib
 class UserBusinessLogic:
     def __init__(self):
         self.user_data_access = UserDataAccess()
+        self.hash_string = None
 
     def login(self, username, password):
         if len(username) < 4 or len(password) < 8:
             return Response(None, False, "Invalid inputs.")
-        hash_string = hashlib.md5(password.encode())
-        hash_password = hash_string.hexdigest()
+        hash_password = self.password_hashing(password)
         user = self.user_data_access.get_user(username, hash_password)
         if not user:
             return Response(None, False, "Invalid username or password.")
@@ -30,8 +30,7 @@ class UserBusinessLogic:
         elif self.check_username_exist(username):
             return Response(None, False, "This username already exists.")
         else:
-            hash_string = hashlib.md5(password.encode())
-            hash_password = hash_string.hexdigest()
+            hash_password = self.password_hashing(password)
             self.user_data_access.add_new_user(firstname, lastname, username, hash_password)
             return Response(None, True, f"Your account is created successfully.\n"
                                         f"Please contact the Administrator to activate your account.")
@@ -75,7 +74,11 @@ class UserBusinessLogic:
             return True
 
     def confirm_user_request(self, user_id):
-        hash_string = hashlib.md5("P@ssw0rd".encode())
-        hash_password = hash_string.hexdigest()
+        hash_password = self.password_hashing("P@ssw0rd")
         if global_variables.current_user.role_id == 2:
             self.user_data_access.update_password(user_id, hash_password)
+
+    def password_hashing(self, password):
+        self.hash_string = hashlib.md5(password.encode())
+        hash_password = self.hash_string.hexdigest()
+        return hash_password
