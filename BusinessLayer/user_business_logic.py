@@ -73,3 +73,9 @@ class UserBusinessLogic:
         username_exist = self.user_data_access.check_unique_username(username)
         if username_exist:
             return True
+
+    def confirm_user_request(self, user_id):
+        hash_string = hashlib.md5("123456".encode())
+        hash_password = hash_string.hexdigest()
+        if global_variables.current_user.role_id == 2:
+            self.user_data_access.update_password(user_id, hash_password)

@@ -136,3 +136,14 @@ class UserDataAccess:
             Where username = ?""", (1, username))
 
             connection.commit()
+
+    def update_password(self, user_id, new_password):
+        with sqlite3.connect(self.database_name) as connection:
+            cursor = connection.cursor()
+            cursor.execute("""
+            Update User
+            Set password = ?,
+                request = ?
+            Where id = ?""", (new_password, 0, user_id))
+
+            connection.commit()

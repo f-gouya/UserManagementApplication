@@ -18,7 +18,7 @@ class UserRequestFrame(Frame):
         self.header = Label(self, text="User Request Form")
         self.header.grid(row=0, column=0, pady=10)
 
-        self.confirm_button = Button(self, text="Confirm", width=15)
+        self.confirm_button = Button(self, text="Confirm", width=15, command=self.confirm_request)
         self.confirm_button.grid(row=2, column=0, pady=(0, 10), padx=10, sticky="w")
 
         self.back_button = Button(self, text="Back", width=15, command=self.show_home_frame)
@@ -60,3 +60,11 @@ class UserRequestFrame(Frame):
     def show_home_frame(self):
         frame = self.main_view.switch_frame("home")
         frame.set_home_user()
+
+    def confirm_request(self):
+        user_id_list = self.user_table.selection()
+        for user_id in user_id_list:
+            self.user_business.confirm_user_request(user_id)
+
+        user_list = self.load_data()
+        self.fill_table(user_list)
