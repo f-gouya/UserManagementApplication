@@ -1,12 +1,12 @@
-from tkinter import Tk
+from ttkbootstrap import Window
 
 
-class Window(Tk):
+class Windows(Window):
     def __init__(self):
-        super().__init__()
+        super().__init__(themename="flatly")
 
         self.title("User Management Application")
-        self.geometry("400x210")
+        self.geometry("500x210")
 
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)

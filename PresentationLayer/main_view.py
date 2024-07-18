@@ -1,4 +1,4 @@
-from PresentationLayer.window import Window
+from PresentationLayer.window import Windows
 from PresentationLayer.login import LoginFrame
 from PresentationLayer.register import RegisterFrame
 from PresentationLayer.home import HomeFrame
@@ -10,7 +10,7 @@ from PresentationLayer.user_request import UserRequestFrame
 
 class MainView:
     def __init__(self):
-        self.window = Window()
+        self.window = Windows()
 
         self.frames = {}
 
