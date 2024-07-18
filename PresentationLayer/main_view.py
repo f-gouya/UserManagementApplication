@@ -5,6 +5,7 @@ from PresentationLayer.home import HomeFrame
 from PresentationLayer.profile import ProfileFrame
 from PresentationLayer.user_management import UserManagementFrame
 from PresentationLayer.reset_password import ResetPasswordFrame
+from PresentationLayer.user_request import UserRequestFrame
 
 
 class MainView:
@@ -13,9 +14,10 @@ class MainView:
 
         self.frames = {}
 
+        self.add_frame("user_request", UserRequestFrame(self.window, self))
         self.add_frame("reset_password", ResetPasswordFrame(self.window, self))
         self.add_frame("profile", ProfileFrame(self.window, self))
-        self.add_frame("user_management", UserManagementFrame(self.window))
+        self.add_frame("user_management", UserManagementFrame(self.window, self))
         self.add_frame("home", HomeFrame(self.window, self))
         self.add_frame("register", RegisterFrame(self.window, self))
         self.add_frame("login", LoginFrame(self.window, self))

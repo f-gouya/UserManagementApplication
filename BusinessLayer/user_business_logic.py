@@ -46,6 +46,11 @@ class UserBusinessLogic:
             return Response(None, True, f"Your request was sent to the administrator.\n"
                                         f"Please contact the Administrator to confirm your request.")
 
+    def get_user_request(self):
+        if global_variables.current_user.role_id == 2:
+            user_list = self.user_data_access.get_all_request()
+            return user_list
+
     def get_users(self):
         if global_variables.current_user.role_id == 2:
             user_list = self.user_data_access.get_all_users(global_variables.current_user.id)

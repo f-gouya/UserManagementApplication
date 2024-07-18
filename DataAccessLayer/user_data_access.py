@@ -48,6 +48,26 @@ class UserDataAccess:
 
         return user_list
 
+    def get_all_request(self):
+        user_list = []
+        with sqlite3.connect(self.database_name) as connection:
+            cursor = connection.cursor()
+            data = cursor.execute("""
+            SELECT id,
+                   first_name,
+                   last_name,
+                   username
+            FROM User
+            Where request =  ?
+            And role_id !=  ?
+            """, (1, 2)).fetchall()
+
+            for item in data:
+                user = User(item[0], item[1], item[2], item[3], None, None, None, None)
+                user_list.append(user)
+
+        return user_list
+
     def update_status(self, user_id, new_value):
         with sqlite3.connect(self.database_name) as connection:
             cursor = connection.cursor()

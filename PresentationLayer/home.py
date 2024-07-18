@@ -21,7 +21,7 @@ class HomeFrame(Frame):
 
         self.user_management_button = Button(self, text="User Management", command=self.load_user_management)
 
-        self.user_request_button = Button(self, text="User Request")
+        self.user_request_button = Button(self, text="User Request", command=self.load_user_request)
 
     def logout(self):
         global_variables.current_user = None
@@ -41,6 +41,6 @@ class HomeFrame(Frame):
         frame = self.main_view.switch_frame("profile")
         frame.show_user_information(global_variables.current_user)
 
-    # def load_user_request(self):
-    #     frame = self.main_view.switch_frame("user_request")
-    #     frame.set_current_user(global_variables.current_user)
+    def load_user_request(self):
+        frame = self.main_view.switch_frame("user_request")
+        frame.set_user_request_info()
