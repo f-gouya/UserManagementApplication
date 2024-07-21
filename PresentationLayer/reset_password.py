@@ -1,4 +1,5 @@
-from tkinter import Frame, Label, Entry, Button, messagebox
+from ttkbootstrap import Frame, Label, Entry, Button
+from ttkbootstrap.dialogs import Messagebox
 from BusinessLayer.user_business_logic import UserBusinessLogic
 
 
@@ -30,9 +31,9 @@ class ResetPasswordFrame(Frame):
         user_business = UserBusinessLogic()
         response = user_business.change_password(username)
         if not response.success:
-            messagebox.showerror("Error", response.message)
+            Messagebox.show_error(response.message, "Error")
         else:
-            messagebox.showinfo("Info", response.message)
+            Messagebox.show_info(response.message, "Info")
             self.clear_change_password_entry()
             self.show_login_frame()
 

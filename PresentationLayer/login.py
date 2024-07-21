@@ -1,4 +1,5 @@
-from tkinter import Frame, Label, Entry, Button, messagebox
+from ttkbootstrap import Frame, Label, Entry, Button
+from ttkbootstrap.dialogs import Messagebox
 from BusinessLayer.user_business_logic import UserBusinessLogic
 from CommonLayer import global_variables
 
@@ -51,7 +52,7 @@ class LoginFrame(Frame):
         response = user_business.login(username, password)
 
         if not response.success:
-            messagebox.showerror("Error", response.message)
+            Messagebox.show_error(response.message, "Error")
         else:
             self.clear_login_entry()
             home_frame = self.main_view.switch_frame("home")

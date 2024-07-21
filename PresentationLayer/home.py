@@ -1,4 +1,4 @@
-from tkinter import Frame, Label, Button
+from ttkbootstrap import Frame, Label, Button
 from CommonLayer import global_variables
 
 

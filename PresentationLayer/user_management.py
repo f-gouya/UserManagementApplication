@@ -1,5 +1,4 @@
-from tkinter import Frame, Label, Button, Entry
-from tkinter.ttk import Treeview
+from ttkbootstrap import Frame, Label, Button, Entry, Treeview
 from BusinessLayer.user_business_logic import UserBusinessLogic
 
 

@@ -1,4 +1,5 @@
-from tkinter import Frame, Label, Entry, Button, messagebox
+from ttkbootstrap import Frame, Label, Entry, Button
+from ttkbootstrap.dialogs import Messagebox
 from BusinessLayer.user_business_logic import UserBusinessLogic
 
 
@@ -64,9 +65,9 @@ class RegisterFrame(Frame):
         user_business = UserBusinessLogic()
         response = user_business.enrollment(firstname, lastname, username, password)
         if not response.success:
-            messagebox.showerror("Error", response.message)
+            Messagebox.show_error(response.message, "Error")
         else:
-            messagebox.showinfo("Info", response.message)
+            Messagebox.show_info(response.message, "Info")
             self.clear_register_entry()
 
     def clear_register_entry(self):
