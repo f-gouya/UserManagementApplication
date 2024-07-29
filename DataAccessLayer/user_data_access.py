@@ -147,3 +147,13 @@ class UserDataAccess:
             Where id = ?""", (new_password, 0, user_id))
 
             connection.commit()
+
+    def record_execution_time(self, function_name, execution_time, call_datetime):
+        with sqlite3.connect(self.database_name) as connection:
+            cursor = connection.cursor()
+            cursor.execute("""
+            INSERT INTO Time (function_name, execution_time, call_datetime)
+            VALUES (?, ?, ?);
+        """, (function_name, execution_time, call_datetime))
+
+            connection.commit()
