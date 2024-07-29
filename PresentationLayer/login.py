@@ -47,7 +47,7 @@ class LoginFrame(Frame):
         self.main_view.switch_frame("reset_password")
 
     def login(self):
-        username = self.username_entry.get()
+        username = self.username_entry.get().lower()
         password = self.password_entry.get()
 
         user_business = UserBusinessLogic()

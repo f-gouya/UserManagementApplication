@@ -34,8 +34,8 @@ class ProfileFrame(Frame):
         self.back_button.grid(row=4, column=0, columnspan=2, pady=10, padx=20, sticky="ew")
 
     def show_user_information(self, user):
-        self.current_user_firstname_label.config(text=f"{user.first_name}")
-        self.current_user_lastname_label.config(text=f"{user.last_name}")
+        self.current_user_firstname_label.config(text=f"{user.first_name.capitalize()}")
+        self.current_user_lastname_label.config(text=f"{user.last_name.capitalize()}")
         self.current_user_username_label.config(text=f"{user.username}")
 
     def show_home_frame(self):

@@ -3,7 +3,6 @@ from CommonLayer.decorators import Decorator
 from DataAccessLayer.user_data_access import UserDataAccess
 from CommonLayer import global_variables
 import hashlib
-import time
 
 decorator = Decorator()
 

@@ -50,8 +50,8 @@ class UserRequestFrame(Frame):
                                          "end",
                                          iid=user.id,
                                          text=str(row_number),
-                                         values=(user.first_name,
-                                                 user.last_name,
+                                         values=(user.first_name.capitalize(),
+                                                 user.last_name.capitalize(),
                                                  user.username))
             self.row_list.append(row)
             row_number += 1

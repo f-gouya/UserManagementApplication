@@ -27,7 +27,7 @@ class ResetPasswordFrame(Frame):
         self.back_button.grid(row=4, column=1, pady=(0, 10), padx=(0, 20), sticky="e")
 
     def change_password(self):
-        username = self.username_entry.get()
+        username = self.username_entry.get().lower()
         user_business = UserBusinessLogic()
         response = user_business.change_password(username)
         if not response.success:

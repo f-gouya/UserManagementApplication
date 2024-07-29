@@ -40,7 +40,7 @@ class UserManagementFrame(Frame):
         self.user_table.heading("#4", text="Status")
 
     def search(self, _):
-        term = self.search_entry.get()
+        term = self.search_entry.get().lower()
         user_list = self.user_business.search(term)
         self.fill_table(user_list)
 
@@ -79,13 +79,14 @@ class UserManagementFrame(Frame):
                                          "end",
                                          iid=user.id,
                                          text=str(row_number),
-                                         values=(user.first_name,
-                                                 user.last_name,
+                                         values=(user.first_name.capitalize(),
+                                                 user.last_name.capitalize(),
                                                  user.username,
                                                  "Active" if user.status else "Inactive"))
             self.row_list.append(row)
             row_number += 1
 
     def show_home_frame(self):
+        self.search_entry.delete(0, "end")
         frame = self.main_view.switch_frame("home")
         frame.set_home_user()

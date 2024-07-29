@@ -57,9 +57,9 @@ class RegisterFrame(Frame):
         login_frame.clear_login_entry()
 
     def enrollment(self):
-        firstname = self.firstname_entry.get()
-        lastname = self.lastname_entry.get()
-        username = self.username_entry.get()
+        firstname = self.firstname_entry.get().lower()
+        lastname = self.lastname_entry.get().lower()
+        username = self.username_entry.get().lower()
         password = self.password_entry.get()
 
         user_business = UserBusinessLogic()

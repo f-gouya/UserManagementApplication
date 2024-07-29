@@ -110,7 +110,7 @@ class UserDataAccess:
             cursor.execute("""
             INSERT INTO User (first_name, last_name, username, password)
             VALUES (?, ?, ?, ?);
-        """, (firstname.capitalize(), lastname.capitalize(), username, password))
+        """, (firstname, lastname, username, password))
 
             connection.commit()
 
@@ -152,7 +152,7 @@ class UserDataAccess:
         with sqlite3.connect(self.database_name) as connection:
             cursor = connection.cursor()
             cursor.execute("""
-            INSERT INTO Time (function_name, execution_time, call_datetime)
+            INSERT INTO TimeLog (function_name, execution_time, call_datetime)
             VALUES (?, ?, ?);
         """, (function_name, execution_time, call_datetime))
 
