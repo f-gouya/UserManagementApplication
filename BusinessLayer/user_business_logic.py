@@ -2,6 +2,7 @@ from CommonLayer.response import Response
 from CommonLayer.decorators import Decorator
 from DataAccessLayer.user_data_access import UserDataAccess
 from CommonLayer import global_variables
+from CommonLayer.user import User
 import hashlib
 
 decorator = Decorator()
@@ -26,13 +27,14 @@ class UserBusinessLogic:
 
     @decorator.execution_time_log
     def enrollment(self, firstname, lastname, username, password):
-        if len(firstname) < 3 or len(lastname) < 3:
-            return Response(None, False, "Invalid inputs.")
-        elif len(username) < 4:
-            return Response(None, False, "Username must be at least 4 characters.")
-        elif len(password) < 8:
-            return Response(None, False, "Password must be complex and at least 8 characters.")
-        elif self.check_username_exist(username):
+        try:
+            user = User(None, firstname, lastname, username, password, 0, 1, 0)
+        except ValueError as e:
+            return Response(None, False, f"{e}")
+
+        # if len(password) < 8:
+        #     return Response(None, False, "Password must be complex and at least 8 characters.")
+        if self.check_username_exist(username):
             return Response(None, False, "This username already exists.")
         else:
             hash_password = self.password_hashing(password)

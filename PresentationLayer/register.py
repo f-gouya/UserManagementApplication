@@ -14,14 +14,14 @@ class RegisterFrame(Frame):
         self.header = Label(self, text="Register Form")
         self.header.grid(row=0, column=1, pady=10, sticky="w")
 
-        self.firstname_label = Label(self, text="First Name")
+        self.firstname_label = Label(self, text="First name")
         self.firstname_label.grid(row=1, column=0, pady=(0, 10), padx=10, sticky="w")
 
         self.firstname_entry = Entry(self)
         self.firstname_entry.grid(row=1, column=1, pady=(0, 10), padx=(0, 20), sticky="ew")
         self.firstname_entry.bind("<KeyRelease>", self.update_username_entry)
 
-        self.lastname_label = Label(self, text="Last Name")
+        self.lastname_label = Label(self, text="Last name")
         self.lastname_label.grid(row=2, column=0, pady=(0, 10), padx=10, sticky="w")
 
         self.lastname_entry = Entry(self)
