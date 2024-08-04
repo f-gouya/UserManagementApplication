@@ -41,7 +41,7 @@ class User:
     @username.setter
     def username(self, value):
         if not isinstance(value, str) or len(value) < 4:
-            raise ValueError("Username must be at least 4 characters.")
+            raise ValueError("Invalid username or password.")
         else:
             self._username = value
 
@@ -51,8 +51,8 @@ class User:
 
     @password.setter
     def password(self, value):
-        if not re.search(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#()])[A-Za-z\d@$!%*?&#()]{8,}$", value):
-            raise ValueError("Password must be complex and at least 8 characters.")
+        if not isinstance(value, str):
+            raise ValueError("Invalid password.")
         else:
             self._password = value
 
