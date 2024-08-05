@@ -1,4 +1,4 @@
-from ttkbootstrap import Frame, Label, Button, Entry, Treeview
+from ttkbootstrap import Frame, Label, Button, Entry, Treeview, Scrollbar, VERTICAL
 from BusinessLayer.user_business_logic import UserBusinessLogic
 
 
@@ -38,6 +38,10 @@ class UserManagementFrame(Frame):
         self.user_table.heading("#2", text="Last Name")
         self.user_table.heading("#3", text="Username")
         self.user_table.heading("#4", text="Status")
+
+        self.scrollbar = Scrollbar(self, orient=VERTICAL, command=self.user_table.yview)
+        self.scrollbar.grid(row=3, column=1, sticky='ns')
+        self.user_table.configure(yscrollcommand=self.scrollbar.set)
 
     def search(self, _):
         term = self.search_entry.get().lower()

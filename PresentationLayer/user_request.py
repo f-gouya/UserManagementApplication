@@ -1,4 +1,4 @@
-from ttkbootstrap import Frame, Label, Button, Treeview
+from ttkbootstrap import Frame, Label, Button, Treeview, Scrollbar, VERTICAL
 from BusinessLayer.user_business_logic import UserBusinessLogic
 
 
@@ -30,6 +30,10 @@ class UserRequestFrame(Frame):
         self.user_table.heading("#1", text="First Name")
         self.user_table.heading("#2", text="Last Name")
         self.user_table.heading("#3", text="Username")
+
+        self.scrollbar = Scrollbar(self, orient=VERTICAL, command=self.user_table.yview)
+        self.scrollbar.grid(row=3, column=1, sticky='ns')
+        self.user_table.configure(yscrollcommand=self.scrollbar.set)
 
     def set_user_request_info(self):
         user_list = self.load_data()
