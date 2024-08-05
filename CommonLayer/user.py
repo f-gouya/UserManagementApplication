@@ -1,6 +1,3 @@
-import re
-
-
 class User:
     def __init__(self, uid, firstname, lastname, username, password, status, role_id, request):
         self.id = uid
@@ -19,7 +16,7 @@ class User:
     @first_name.setter
     def first_name(self, value):
         if not isinstance(value, str) or len(value) < 3 or not value.isalpha():
-            raise ValueError("Invalid First name.")
+            raise ValueError("The first name must be at least 3 characters and contain only letters.")
         else:
             self._first_name = value
 
@@ -30,7 +27,7 @@ class User:
     @last_name.setter
     def last_name(self, value):
         if not isinstance(value, str) or len(value) < 3 or not value.isalpha():
-            raise ValueError("Invalid Last name.")
+            raise ValueError("The last name must be at least 3 characters and contain only letters.")
         else:
             self._last_name = value
 
@@ -41,7 +38,7 @@ class User:
     @username.setter
     def username(self, value):
         if not isinstance(value, str) or len(value) < 4:
-            raise ValueError("Invalid username or password.")
+            raise ValueError("The username must be at least 4 characters.")
         else:
             self._username = value
 
@@ -51,8 +48,8 @@ class User:
 
     @password.setter
     def password(self, value):
-        if not isinstance(value, str):
-            raise ValueError("Invalid password.")
+        if not isinstance(value, str) or len(value) < 8:
+            raise ValueError("The password must be complex and at least 8 characters.")
         else:
             self._password = value
 

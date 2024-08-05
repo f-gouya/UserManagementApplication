@@ -16,7 +16,7 @@ class UserBusinessLogic:
 
     @decorator.execution_time_log
     def login(self, username, password):
-        if len(username) < 4 or len(password) < 8:
+        if not username or not password:
             return Response(None, False, "Invalid inputs.")
         hash_password = self.password_hashing(password)
         user = self.user_data_access.get_user(username, hash_password)
@@ -28,18 +28,19 @@ class UserBusinessLogic:
 
     @decorator.execution_time_log
     def enrollment(self, firstname, lastname, username, password):
-        user = None
-        if not re.search(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#()])[A-Za-z\d@$!%*?&#()]{8,}$", password):
-            return Response(None, False, "Password must be complex and at least 8 characters.")
-        elif self.check_username_exist(username):
-            return Response(None, False, "This username already exists.")
         try:
-            user = User(None, firstname, lastname, username, password, 0, 1, 0)
+            new_user = User(None, firstname, lastname, username, password, 0, 1, 0)
         except ValueError as e:
             return Response(None, False, f"{e}")
-        finally:
-            hash_password = self.password_hashing(user.password)
-            self.user_data_access.add_new_user(user.first_name, user.last_name, user.username, hash_password)
+        else:
+            if not re.search(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#()])[A-Za-z\d@$!%*?&#()]{8,}$", password):
+                return Response(None, False, "The password must be complex and at least 8 characters.")
+            elif self.check_username_exist(username):
+                return Response(None, False, "This username already exists.")
+
+            hash_password = self.password_hashing(password)
+            new_user.password = hash_password
+            self.user_data_access.add_new_user(new_user)
             return Response(None, True, f"Your account is created successfully.\n"
                                         f"Please contact the Administrator to activate your account.")
 

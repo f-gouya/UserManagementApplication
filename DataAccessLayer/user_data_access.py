@@ -36,6 +36,7 @@ class UserDataAccess:
                    first_name,
                    last_name,
                    username,
+                   password,
                    status,
                    role_id,
                    request
@@ -43,7 +44,7 @@ class UserDataAccess:
             Where id !=  ?""", (current_user_id,)).fetchall()
 
             for item in data:
-                user = User(item[0], item[1], item[2], item[3], None, item[4] == 1, item[5], item[6])
+                user = User(item[0], item[1], item[2], item[3], item[4], item[5] == 1, item[6], item[7])
                 user_list.append(user)
 
         return user_list
@@ -56,14 +57,15 @@ class UserDataAccess:
             SELECT id,
                    first_name,
                    last_name,
-                   username
+                   username,
+                   password
             FROM User
             Where request =  ?
             And role_id !=  ?
             """, (1, 2)).fetchall()
 
             for item in data:
-                user = User(item[0], item[1], item[2], item[3], None, None, None, None)
+                user = User(item[0], item[1], item[2], item[3], item[4], None, None, None)
                 user_list.append(user)
 
         return user_list
@@ -87,6 +89,7 @@ class UserDataAccess:
                    first_name,
                    last_name,
                    username,
+                   password,
                    status,
                    role_id,
                    request
@@ -99,18 +102,18 @@ class UserDataAccess:
             data = cursor.fetchall()
 
             for item in data:
-                user = User(item[0], item[1], item[2], item[3], None, item[4] == 1, item[5], item[6])
+                user = User(item[0], item[1], item[2], item[3], item[4], item[5] == 1, item[6], item[7])
                 user_list.append(user)
 
         return user_list
 
-    def add_new_user(self, firstname, lastname, username, password):
+    def add_new_user(self, new_user):
         with sqlite3.connect(self.database_name) as connection:
             cursor = connection.cursor()
             cursor.execute("""
             INSERT INTO User (first_name, last_name, username, password)
             VALUES (?, ?, ?, ?);
-        """, (firstname, lastname, username, password))
+        """, (new_user.first_name, new_user.last_name, new_user.username, new_user.password))
 
             connection.commit()
 
