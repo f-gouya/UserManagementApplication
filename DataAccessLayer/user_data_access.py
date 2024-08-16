@@ -24,7 +24,7 @@ class UserDataAccess:
             """, (username, password)).fetchone()
 
             if data:
-                user = User(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7])
+                user = User.create_instance_tuple(data)
                 return user
 
     def get_all_users(self, current_user_id):
@@ -44,7 +44,7 @@ class UserDataAccess:
             Where id !=  ?""", (current_user_id,)).fetchall()
 
             for item in data:
-                user = User(item[0], item[1], item[2], item[3], item[4], item[5] == 1, item[6], item[7])
+                user = User.create_instance_tuple(item)
                 user_list.append(user)
 
         return user_list
@@ -65,7 +65,7 @@ class UserDataAccess:
             """, (1, 2)).fetchall()
 
             for item in data:
-                user = User(item[0], item[1], item[2], item[3], item[4], None, None, None)
+                user = User.create_instance_tuple(item)
                 user_list.append(user)
 
         return user_list
@@ -102,7 +102,7 @@ class UserDataAccess:
             data = cursor.fetchall()
 
             for item in data:
-                user = User(item[0], item[1], item[2], item[3], item[4], item[5] == 1, item[6], item[7])
+                user = User.create_instance_tuple(item)
                 user_list.append(user)
 
         return user_list

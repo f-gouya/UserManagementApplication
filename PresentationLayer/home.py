@@ -28,10 +28,13 @@ class HomeFrame(Frame):
         self.main_view.switch_frame("login")
 
     def set_home_user(self):
-        self.header.config(text=f"Welcome {global_variables.current_user.get_full_name()}")
+        self.header.config(text=f"Welcome {global_variables.current_user}")
         if global_variables.current_user.role_id == 2:
             self.user_management_button.grid(row=3, column=0, pady=(0, 10), padx=20, sticky="ew")
             self.user_request_button.grid(row=4, column=0, pady=(0, 10), padx=20, sticky="ew")
+        else:
+            self.user_management_button.grid_remove()
+            self.user_request_button.grid_remove()
 
     def load_user_management(self):
         frame = self.main_view.switch_frame("user_management")

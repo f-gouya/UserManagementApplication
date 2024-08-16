@@ -29,7 +29,7 @@ class UserBusinessLogic:
     @decorator.execution_time_log
     def enrollment(self, firstname, lastname, username, password):
         try:
-            new_user = User(None, firstname, lastname, username, password, 0, 1, 0)
+            new_user = User.create_instance_tuple((None, firstname, lastname, username, password))
         except ValueError as e:
             return Response(None, False, f"{e}")
         else:
