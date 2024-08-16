@@ -61,8 +61,8 @@ class User:
         else:
             self._password = value
 
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+    # def __str__(self):
+    #     return f"{self.first_name} {self.last_name}"
 
     @classmethod
     def create_instance_tuple(cls, data_tuple):
